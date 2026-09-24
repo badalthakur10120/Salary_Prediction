@@ -3,7 +3,8 @@
 // ===============================
 
 const API_URL =
-    "https://five-contracts-org-aims.trycloudflare.com";
+   "https://salary-prediction-woyu.onrender.com/predict";
+   
 const API_KEY = "salary-ai-2026-demo-key";
 
 
@@ -400,38 +401,25 @@ if (experience > age - 18) {
             // API REQUEST
             // ===============================
 
-            const response =
-                await fetch(
-                    API_URL,
-                    {
-                        method: "POST",
+            const response = await fetch(
+    API_URL,
+    {
+        method: "POST",
 
-                        headers: {
-                            "Content-Type":
-                                "application/json",
+        headers: {
+            "Content-Type": "application/json",
+            "x-api-key": API_KEY
+        },
 
-                            "x-api-key":
-                                API_KEY
-                        },
-
-                        body: JSON.stringify(
-                            {
-                                Age: age,
-
-                                Gender: gender,
-
-                                Education_Level:
-                                    education,
-
-                                Job_Title:
-                                    jobTitle,
-
-                                Years_of_Experience:
-                                    experience
-                            }
-                        )
-                    }
-                );
+        body: JSON.stringify({
+            Age: age,
+            Gender: gender,
+            "Education Level": education,
+            "Job Title": jobTitle,
+            "Years of Experience": experience
+        })
+    }
+);
 
 
             if (!response.ok) {
@@ -626,10 +614,7 @@ explanationList.innerHTML = `
             );
 
 
-            alert(
-                "Unable to connect to the Salary Prediction API.\n\n" +
-                "Please make sure your Google Colab API and Cloudflare tunnel are running."
-            );
+            alert("Unable to connect to the Salary Prediction API.\n\nPlease check that the permanent API is running.");
 
         }
 
