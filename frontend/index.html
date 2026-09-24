@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>AI Salary Prediction</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- ================= NAVIGATION ================= -->
+
+<nav class="navbar">
+
+    <div class="nav-logo">
+        AI Salary Prediction
+    </div>
+
+    <div class="nav-links">
+
+        <a href="#result">Prediction</a>
+
+        <a href="#history">History</a>
+
+        <a href="#performance">Performance</a>
+
+        <a href="#charts">Charts</a>
+
+        <a href="#featureImportance">Features</a>
+
+        <a href="#salaryBands">Salary Bands</a>
+
+    </div>
+
+</nav>
+
+    <!-- ================= HERO HEADER ================= -->
+
+    <div class="hero">
+
+        <div class="hero-badge">
+            AI • MACHINE LEARNING
+        </div>
+
+        <h1>AI Salary Prediction</h1>
+
+        <p>
+            Predict employee salary using experience, education,
+            age and job role.
+        </p>
+
+        <div class="hero-tech">
+    <span>Random Forest</span>
+    <span>Linear Regression</span>
+    <span>Data Science</span>
+</div>
+
+<div id="apiStatus" class="api-status">
+    🟡 Checking API...
+</div>
+
+    </div>
+
+
+    <!-- ================= INPUT SECTION ================= -->
+
+    <div class="container">
+        <form>
+
+            <label>Age:</label>
+            <input
+    type="number"
+    id="age"
+    min="21"
+    max="62"
+    placeholder="Enter age (21–62)"
+>
+
+            <br><br>
+
+            <label>Gender:</label>
+            <select id="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <br><br>
+
+            <label>Education Level:</label>
+            <select id="education">
+                <option value="High School">High School</option>
+                <option value="Bachelor's">Bachelor's</option>
+                <option value="Master's">Master's</option>
+                <option value="PhD">PhD</option>
+            </select>
+
+            <br><br>
+
+            <label>Job Title:</label>
+            <input
+    type="text"
+    id="jobTitle"
+    placeholder="e.g. Software Engineer"
+>
+            <br><br>
+
+            <label>Years of Experience:</label>
+            <input
+    type="number"
+    id="experience"
+    min="0"
+    max="34"
+    step="1"
+    placeholder="Enter experience (0–34 years)"
+>
+
+            <br><br>
+
+            <button type="button" id="predictButton">
+                Predict Salary
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- ================= RESULT SECTION ================= -->
+
+    
+
+<div id="result">
+
+    <h2>Prediction Result</h2>
+
+    <p>Predicted Salary</p>
+
+    <div id="salary">₹0</div>
+
+    <div id="salaryBand" class="salary-badge">
+        -
+    </div>
+    <div id="model" class="model-info">
+    Model: Random Forest
+</div>
+
+    <hr>
+
+    <div id="inputSummary">
+    Enter employee details to see the prediction.
+</div>
+
+<div id="predictionExplanation" class="prediction-explanation">
+    <h3>Why this prediction?</h3>
+    <ul id="explanationList">
+        <li>Enter employee details and make a prediction to see the explanation.</li>
+    </ul>
+</div>
+
+<div id="predictionTime"></div>
+
+</div>
+
+
+    <!-- ================= HISTORY SECTION ================= -->
+
+    <div id="history">
+
+        <h2>Prediction History</h2>
+
+        <!-- History Statistics -->
+
+        <div class="history-stats">
+
+    <div class="history-stat">
+        <h3 id="predictionCount">0</h3>
+        <p>Total Predictions</p>
+    </div>
+
+    <div class="history-stat">
+        <h3 id="averageSalary">₹0</h3>
+        <p>Average Predicted Salary</p>
+    </div>
+
+    <div class="history-stat">
+        <h3 id="highestSalary">₹0</h3>
+        <p>Highest Predicted Salary</p>
+    </div>
+
+    <div class="history-stat">
+        <h3 id="commonBand">-</h3>
+        <p>Most Common Salary Band</p>
+    </div>
+
+</div>
+
+
+        <!-- Clear History Button -->
+
+        <button id="clearHistoryButton">
+            Clear History
+        </button>
+
+
+        <!-- History Table -->
+
+        <table>
+   <thead>
+      <tr>
+         <th>Date & Time</th>
+         <th>Age</th>
+         <th>Gender</th>
+         <th>Education</th>
+         <th>Job Title</th>
+         <th>Experience</th>
+         <th>Salary</th>
+         <th>Band</th>
+         <th>Model</th>
+         <th>Time</th>
+      </tr>
+   </thead>
+
+   <tbody id="historyBody"></tbody>
+</table>
+
+
+        <!-- Prediction Distribution -->
+
+        <div class="history-chart">
+
+            <h3>Prediction Distribution</h3>
+
+            <canvas id="bandChart"></canvas>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= MODEL PERFORMANCE ================= -->
+
+    <div id="performance">
+
+        <h2>Model Performance</h2>
+
+        <div class="model-card">
+
+            <h3>Linear Regression</h3>
+
+            <p>
+                MAE:
+                <span>₹16,375.45</span>
+            </p>
+
+            <p>
+                RMSE:
+                <span>₹22,445.93</span>
+            </p>
+
+            <p>
+                R² Score:
+                <span>0.8231</span>
+            </p>
+
+        </div>
+
+
+        <div class="model-card">
+
+            <h3>Random Forest</h3>
+
+            <p>
+                MAE:
+                <span>₹10,188.47</span>
+            </p>
+
+            <p>
+                RMSE:
+                <span>₹16,525.38</span>
+            </p>
+
+            <p>
+                R² Score:
+                <span>0.9041</span>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= MODEL COMPARISON CHARTS ================= -->
+
+    <div id="charts">
+
+        <h2>Model Comparison</h2>
+
+
+        <div class="chart-box">
+
+            <h3>MAE Comparison</h3>
+
+            <canvas id="maeChart"></canvas>
+
+        </div>
+
+
+        <div class="chart-box">
+
+            <h3>RMSE Comparison</h3>
+
+            <canvas id="rmseChart"></canvas>
+
+        </div>
+
+
+        <div class="chart-box">
+
+            <h3>R² Score Comparison</h3>
+
+            <canvas id="r2Chart"></canvas>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FEATURE IMPORTANCE ================= -->
+
+    <div id="featureImportance">
+
+        <h2>Feature Importance</h2>
+
+        <p class="section-description">
+            Most influential features used by the Random Forest model.
+        </p>
+
+        <div class="chart-box">
+
+            <canvas id="featureChart"></canvas>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SALARY BAND ANALYSIS ================= -->
+
+    <div id="salaryBands">
+
+        <h2>Salary Band Analysis</h2>
+
+
+        <!-- Salary Bands -->
+
+        <div class="band-info">
+
+            <div class="band-card">
+
+                <h3>Low</h3>
+
+                <p>
+                    &lt; ₹83,520
+                </p>
+
+            </div>
+
+
+            <div class="band-card">
+
+                <h3>Medium</h3>
+
+                <p>
+                    ₹83,520 – ₹140,000
+                </p>
+
+            </div>
+
+
+            <div class="band-card">
+
+                <h3>High</h3>
+
+                <p>
+                    &gt; ₹140,000
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Confusion Matrix -->
+
+        <h3 class="matrix-title">
+            Confusion Matrix
+        </h3>
+
+
+        <table class="confusion-matrix">
+
+            <thead>
+
+                <tr>
+
+                    <th>Actual / Predicted</th>
+
+                    <th>Low</th>
+
+                    <th>Medium</th>
+
+                    <th>High</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr>
+
+                    <th>Low</th>
+
+                    <td>111</td>
+
+                    <td>19</td>
+
+                    <td>1</td>
+
+                </tr>
+
+
+                <tr>
+
+                    <th>Medium</th>
+
+                    <td>3</td>
+
+                    <td>86</td>
+
+                    <td>6</td>
+
+                </tr>
+
+
+                <tr>
+
+                    <th>High</th>
+
+                    <td>1</td>
+
+                    <td>15</td>
+
+                    <td>116</td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+
+        <!-- Accuracy -->
+
+        <div class="accuracy">
+
+            <strong>
+                Salary Band Accuracy: 87.43%
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <!-- Chart.js -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Our JavaScript -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
